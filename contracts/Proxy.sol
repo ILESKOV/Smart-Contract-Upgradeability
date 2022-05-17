@@ -20,6 +20,7 @@ contract Proxy is Storage{
         require(implementation != address(0));
         bytes memory data = msg.data;
 
+        //DELEGATE EVERY FUNCTION CALL
         assembly {
             let result := delegatecall(gas(), implementation, add(data, 0x20), mload(data), 0, 0)
             let size := returndatasize()
